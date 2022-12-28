@@ -119,6 +119,64 @@ class Ticket < ActiveRecord::Base
 end
 ```
 
+### add_helper_methods
+
+This helper adds both the accessor and finder methods.
+
+It takes a column name and an array of values.
+
+```ruby
+class Ticket < ActiveRecord::Base
+  STATUSES = %w[not_started in_progress completed blocked archived approved rejected]
+
+  add_helper_methods column: :status, values: STATUSES
+end
+```
+
+Without the helper, this is significantly more verbose, especially when there are lots of values:
+
+```ruby
+class Ticket < ActiveRecord::Base
+  STATUSES = %w[not_started in_progress completed blocked archived approved rejected]
+
+  scope :not_started, -> { where(status: "not_started") }
+  scope :in_progress, -> { where(status: "in_progress") }
+  scope :completed, -> { where(status: "completed") }
+  scope :blocked, -> { where(status: "blocked") }
+  scope :archived, -> { where(status: "archived") }
+  scope :approved, -> { where(status: "approved") }
+  scope :rejected, -> { where(status: "rejected") }
+
+  def not_started?
+    status == "not_started"
+  end
+
+  def in_progress?
+    status == "in_progress"
+  end
+
+  def completed?
+    status == "completed"
+  end
+
+  def blocked?
+    status == "blocked"
+  end
+
+  def archived?
+    status == "archived"
+  end
+
+  def approved?
+    status == "approved"
+  end
+
+  def rejected?
+    status == "rejected"
+  end
+end
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
