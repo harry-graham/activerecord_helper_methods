@@ -26,7 +26,7 @@ Or install it yourself as:
 
 ### add_accessor_methods
 
-This helper takes a column name and an array of values, and defines an instance method for each value.
+This helper takes a column name and an array of values.
 
 ```ruby
 class Ticket < ActiveRecord::Base
@@ -34,7 +34,11 @@ class Ticket < ActiveRecord::Base
 
   add_accessor_methods column: :status, values: STATUSES
 end
+```
 
+Result: it defines an instance method for each value:
+
+```ruby
 ticket = Ticket.create!(status: "in_progress")
 
 ticket.not_started?
@@ -43,6 +47,76 @@ ticket.in_progress?
 => true
 ticket.completed?
 => false
+```
+
+Without the helper, this is more verbose, and requires more maintenance because it would require a new instance method to be added manually whenever a new status is added:
+
+```ruby
+class Ticket < ActiveRecord::Base
+  STATUSES = %w[not_started in_progress completed]
+
+  def not_started?
+    status == "not_started"
+  end
+
+  def in_progress?
+    status == "in_progress"
+  end
+
+  def completed?
+    status == "completed"
+  end
+end
+```
+
+This can also be done using meta-programming, as this gem does, but this may add unwanted complexity to your project.
+
+### add_finder_methods
+
+This helper takes a column name and an array of values.
+
+```ruby
+class Ticket < ActiveRecord::Base
+  STATUSES = %w[not_started in_progress completed]
+
+  add_finder_methods column: :status, values: STATUSES
+end
+```
+
+Result: it defines a class method for each value, that filters by that value:
+
+```ruby
+ticket_not_started = Ticket.create!(status: "not_started")
+ticket_in_progress = Ticket.create!(status: "in_progress")
+ticket_completed = Ticket.create!(status: "completed")
+
+Ticket.count
+=> 3
+Ticket.not_started
+# Returns an ActiveRecord::Relation object that contains only ticket_not_started
+Ticket.in_progress
+# Returns an ActiveRecord::Relation object that contains only ticket_in_progress
+Ticket.completed
+# Returns an ActiveRecord::Relation object that contains only ticket_completed
+```
+
+Each method returns an ActiveRecord::Relation, and so are chainable with any other class methods, e.g.:
+```ruby
+# Note: open and active are fictional class methods in this example
+Ticket.open.not_started.active.count
+=> 1
+```
+
+Without the helper, this is more verbose, and requires more maintenance because it would require a new class method (scope) to be added manually whenever a new status is added:
+
+```ruby
+class Ticket < ActiveRecord::Base
+  STATUSES = %w[not_started in_progress completed]
+
+  scope :not_started, -> { where(status: "not_started") }
+  scope :in_progress, -> { where(status: "in_progress") }
+  scope :completed, -> { where(status: "completed") }
+end
 ```
 
 ## Development
