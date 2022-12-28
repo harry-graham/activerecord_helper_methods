@@ -37,4 +37,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", ">= 13.0"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "sqlite3", ">= 0"
+  spec.add_development_dependency "database_cleaner-active_record", ">= 0"
 end

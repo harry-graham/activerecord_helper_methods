@@ -19,6 +19,10 @@ GEM
       tzinfo (~> 2.0)
     coderay (1.1.3)
     concurrent-ruby (1.1.10)
+    database_cleaner-active_record (2.0.1)
+      activerecord (>= 5.a)
+      database_cleaner-core (~> 2.0.0)
+    database_cleaner-core (2.0.1)
     diff-lcs (1.5.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
@@ -50,6 +54,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord_helper_methods!
+  database_cleaner-active_record
   pry
   rake (>= 13.0)
   rspec (~> 3.0)
