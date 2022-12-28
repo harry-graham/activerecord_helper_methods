@@ -11,7 +11,6 @@ Gem::Specification.new do |spec|
   spec.summary       = "Allows easy adding of helper methods for ActiveRecord models."
   spec.description    = <<-DESC
     Allows easy adding of helper methods for ActiveRecord models.
-    Both finder methods and accessor methods are supported.
     See usage for examples: https://github.com/harry-graham/activerecord_helper_methods#usage
   DESC
   spec.homepage      = "https://github.com/harry-graham/activerecord_helper_methods"
