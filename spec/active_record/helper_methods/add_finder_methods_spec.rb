@@ -17,24 +17,56 @@ RSpec.describe ActiveRecord::HelperMethods::ModelHelperMethods do
 
     it "raises an error if column argument is invalid" do
       expect do
-        class InvalidModel < ActiveRecord::Base
+        class Ticket < ActiveRecord::Base
           add_finder_methods column: 1, values: %w[one two three]
         end
       end.to raise_error(
         StandardError,
-        "Invalid column value - must be a symbol"
+        "Invalid column value - must be a column on this table"
       )
+    end
+
+    it "does not raise an error if column argument is a symbol (and is a column of the table)" do
+      expect do
+        class Ticket < ActiveRecord::Base
+          add_finder_methods column: :status, values: %w[one two three]
+        end
+      end.not_to raise_error
+    end
+
+    it "does not raise an error if column argument is a string (and is a column of the table)" do
+      expect do
+        class Ticket < ActiveRecord::Base
+          add_finder_methods column: "status", values: %w[one two three]
+        end
+      end.not_to raise_error
     end
 
     it "raises an error if values argument is invalid" do
       expect do
-        class InvalidModel < ActiveRecord::Base
+        class Ticket < ActiveRecord::Base
           add_finder_methods column: :status, values: ['one', :two, 3]
         end
       end.to raise_error(
         StandardError,
-        "Invalid values - must be an array of strings"
+        "Invalid values - must be an array of strings or symbols"
       )
+    end
+
+    it "does not raise an error if values argument is an array of strings"  do
+      expect do
+        class Ticket < ActiveRecord::Base
+          add_finder_methods column: "status", values: %w[one two three]
+        end
+      end.not_to raise_error
+    end
+
+    it "does not raise an error if values argument is an array of symbols"  do
+      expect do
+        class Ticket < ActiveRecord::Base
+          add_finder_methods column: "status", values: %i[one two three]
+        end
+      end.not_to raise_error
     end
   end
 end
