@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 RSpec.describe ActiveRecord::HelperMethods::AccessorMethods do
-  let(:ticket_not_started) { ModelWithAccessorMethods.create!(status: "not_started") }
-  let(:ticket_in_progress) { ModelWithAccessorMethods.create!(status: "in_progress") }
-  let(:ticket_completed) { ModelWithAccessorMethods.create!(status: "completed") }
+  let(:ticket_not_started) { ModelWithAccessorMethods.new(status: "not_started") }
+  let(:ticket_in_progress) { ModelWithAccessorMethods.new(status: "in_progress") }
+  let(:ticket_completed) { ModelWithAccessorMethods.new(status: "completed") }
 
   describe "add_accessor_methods" do
     it "defines accessor methods for each value", :aggregate_failures do
