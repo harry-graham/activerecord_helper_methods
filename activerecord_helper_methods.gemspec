@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["harry.graham.595@gmail.com"]
 
   spec.summary       = "Allows easy adding of helper methods for ActiveRecord models."
-  gem.description    = <<-DESC
+  spec.description    = <<-DESC
     Allows easy adding of helper methods for ActiveRecord models.
     Both finder methods and accessor methods are supported.
     See usage for examples: https://github.com/harry-graham/activerecord_helper_methods#usage
