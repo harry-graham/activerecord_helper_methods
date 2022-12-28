@@ -19,4 +19,6 @@ class ModelWithAccessorMethods < Ticket
   add_accessor_methods column: :status, values: STATUSES
 end
 
-Ticket.create!(status: "in_progress")
+class ModelWithFinderMethods < Ticket
+  add_finder_methods column: :status, values: STATUSES
+end
