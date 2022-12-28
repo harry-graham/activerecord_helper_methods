@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/setup"
+
+# Copy test logic from spec/spec_helper.rb as needed.
+
+# Load gems
+require "pry"
+require "active_record"
+
+# Load lib files
+require "active_record/helper_methods"
+
+# Set up fixtures
+require_relative "../spec/fixtures/setup"
+
+require "irb"
+IRB.start(__FILE__)
