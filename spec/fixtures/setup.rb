@@ -22,3 +22,7 @@ end
 class ModelWithFinderMethods < Ticket
   add_finder_methods column: :status, values: STATUSES
 end
+
+class ModelWithHelperMethods < Ticket
+  add_helper_methods column: :status, values: STATUSES
+end
