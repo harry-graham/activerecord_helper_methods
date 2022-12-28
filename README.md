@@ -2,6 +2,10 @@
 
 A quick and easy way to add certain types of helper methods to your models.
 
+## Currently supported
+- Finder methods
+- Accessor methods
+
 ## Installation
 
 Add this line to your application's Gemfile:
