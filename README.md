@@ -1,6 +1,6 @@
 # ActiveRecord Helper Methods
 
-A quick and easy way to add certain types of helper methods to your models.
+A quick and easy way to add certain types of helper methods to your ActiveRecord models.
 
 ## Currently supported
 - Finder methods
