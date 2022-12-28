@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe ActiveRecord::HelperMethods::FinderMethods do
+RSpec.describe ActiveRecord::HelperMethods::ModelHelperMethods do
   let(:ticket_not_started) { ModelWithFinderMethods.create!(status: "not_started") }
   let(:ticket_in_progress) { ModelWithFinderMethods.create!(status: "in_progress") }
   let(:ticket_completed) { ModelWithFinderMethods.create!(status: "completed") }

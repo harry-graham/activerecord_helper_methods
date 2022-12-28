@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe ActiveRecord::HelperMethods::AccessorMethods do
+RSpec.describe ActiveRecord::HelperMethods::ModelHelperMethods do
   let(:ticket_not_started) { ModelWithAccessorMethods.new(status: "not_started") }
   let(:ticket_in_progress) { ModelWithAccessorMethods.new(status: "in_progress") }
   let(:ticket_completed) { ModelWithAccessorMethods.new(status: "completed") }
